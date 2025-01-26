@@ -1,15 +1,21 @@
 "use client";
 
+import { useSearchStore } from "@/hooks/useSearchStore";
 import { FormEvent, useState } from "react";
 
 const Search = () => {
   const [input, setInput] = useState("");
+  const [query, setQuery] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    console.log(input.trim());
+    setQuery(input.trim());
   };
+
+  const { data } = useSearchStore({ query });
+
+  console.log("🚀 ~ Home ~ data:", data);
 
   return (
     <form
