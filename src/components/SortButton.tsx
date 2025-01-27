@@ -45,11 +45,11 @@ export default function SortButton({ sortBy, children }: SortButtonProps) {
 
   return (
     <button
-      className="flex items-center text-emerald-400 hover:text-emerald-500 transition-colors"
+      className="flex gap-1 items-center text-emerald-400 hover:text-emerald-500"
       onClick={handleClick}
     >
       {children}
-      <div className={cn("ml-1", order === "asc" && "transform rotate-180")}>
+      <div className={cn(order === "asc" && "transform rotate-180")}>
         <ChevronDown />
       </div>
     </button>
