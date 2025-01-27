@@ -20,7 +20,7 @@ export default function useSearch(): UseSearchReturn {
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
       params.set(name, value);
-      params.set("page", "1"); // Resetowanie strony do 1
+      params.set("page", "1");
       return params.toString();
     },
     [searchParams],
