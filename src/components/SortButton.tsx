@@ -1,10 +1,9 @@
 "use client";
 
+import useSort from "@/hooks/useSort";
 import ChevronDown from "@/icons/ChevronDown";
 import { cn } from "@/utils/cn";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
-import { ReactNode, useCallback } from "react";
+import { ReactNode } from "react";
 
 type SortButtonProps = {
   sortBy: string;
@@ -12,44 +11,21 @@ type SortButtonProps = {
 };
 
 export default function SortButton({ sortBy, children }: SortButtonProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const order = searchParams.get("order") || "desc";
+  const { order, currentSort, handleSort } = useSort();
 
-  const createQueryString = useCallback(
-    (params: { name: string; value: string }[]) => {
-      const newParams = new URLSearchParams(searchParams.toString());
-
-      params.forEach(({ name, value }) => {
-        newParams.set(name, value);
-      });
-
-      return newParams.toString();
-    },
-    [searchParams],
-  );
-
-  const handleClick = () => {
-    const newOrder = order === "asc" ? "desc" : "asc";
-
-    router.push(
-      pathname +
-        "?" +
-        createQueryString([
-          { name: "sort", value: sortBy },
-          { name: "order", value: newOrder },
-        ]),
-    );
-  };
+  const isActiveSort = currentSort === sortBy;
 
   return (
     <button
-      className="flex gap-1 items-center text-emerald-400 hover:text-emerald-500"
-      onClick={handleClick}
+      className={cn(
+        "flex items-center gap-1 text-emerald-400 hover:text-emerald-500",
+        isActiveSort ? "font-semibold" : "",
+      )}
+      onClick={() => handleSort(sortBy)}
+      aria-pressed={isActiveSort}
     >
       {children}
-      <div className={cn(order === "asc" && "transform rotate-180")}>
+      <div className={cn(order === "asc" && "rotate-180 transform")}>
         <ChevronDown />
       </div>
     </button>

@@ -1,4 +1,5 @@
 import { getRepositories } from "@/api/repositories";
+import Pagination from "@/components/Pagination";
 import Table from "@/components/RepositoriesTable";
 
 export default async function Home({
@@ -6,9 +7,14 @@ export default async function Home({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { search, sort, order } = await searchParams;
+  const { search, sort, order, page } = await searchParams;
 
-  const data = await getRepositories({ query: search, sort, order });
+  const { items, total_count } = await getRepositories({
+    query: search,
+    sort,
+    order,
+    page: Number(page),
+  });
 
   return (
     <main className="min-h-full space-y-4 mt-8 bg-neutral-950">
@@ -20,7 +26,8 @@ export default async function Home({
       </div>
 
       <section className="not-prose relative overflow-hidden flex flex-col gap-y-4">
-        <Table data={data} />
+        <Table data={items} />
+        <Pagination totalCount={total_count} />
       </section>
     </main>
   );

@@ -1,3 +1,5 @@
+import { PAGINATION_PER_PAGE } from "@/constants";
+
 type Owner = {
   login: string;
 };
@@ -12,6 +14,7 @@ export type Repository = {
 
 type RepositoriesResponse = {
   items: Repository[];
+  total_count: number;
 };
 
 const REPOSITORIES_URL =
@@ -21,16 +24,23 @@ type PayloadProps = {
   query?: string | string[];
   order?: string | string[];
   sort?: string | string[];
+  page?: number;
 };
 
 export async function getRepositories({
   query = "",
   sort = "stars",
   order = "desc",
-}: PayloadProps): Promise<Repository[]> {
+  page = 1,
+}: PayloadProps): Promise<RepositoriesResponse> {
   const data: RepositoriesResponse = await fetch(
-    REPOSITORIES_URL + `?q=${query}` + `&sort=${sort}` + `&order=${order}`,
+    REPOSITORIES_URL +
+      `?q=${query}` +
+      `&sort=${sort}` +
+      `&order=${order}` +
+      `&page=${page}` +
+      `&per_page=${PAGINATION_PER_PAGE}`,
   ).then((res) => res.json());
 
-  return data.items;
+  return { items: data.items, total_count: data.total_count };
 }
