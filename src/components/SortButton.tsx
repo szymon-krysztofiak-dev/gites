@@ -25,7 +25,9 @@ export default function SortButton({ sortBy, children }: SortButtonProps) {
       aria-pressed={isActiveSort}
     >
       {children}
-      <div className={cn(order === "asc" && "rotate-180 transform")}>
+      <div
+        className={cn("flex size-5", order === "asc" && "rotate-180 transform")}
+      >
         <ChevronDown />
       </div>
     </button>
