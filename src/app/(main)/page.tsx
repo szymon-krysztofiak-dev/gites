@@ -6,9 +6,9 @@ export default async function Home({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { search } = await searchParams;
+  const { search, sort, order } = await searchParams;
 
-  const data = await getRepositories(search as string);
+  const data = await getRepositories({ query: search, sort, order });
 
   return (
     <main className="min-h-full space-y-4 mt-8 bg-neutral-950">

@@ -1,4 +1,5 @@
 import { Repository } from "@/api/repositories";
+import SortButton from "./SortButton";
 
 type RepositoriesTableProps = {
   data: Repository[];
@@ -24,18 +25,15 @@ export default function RepositoriesTable({ data }: RepositoriesTableProps) {
             </th>
             <th
               scope="col"
-              className="hidden px-3 py-3.5 text-left text-sm font-semibold text-neutral-200 sm:table-cell"
+              className="px-3 py-3.5 text-left text-sm font-semibold text-neutral-200"
             >
-              Stars
+              <SortButton sortBy="stars">Stars</SortButton>
             </th>
             <th
               scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-neutral-200"
+              className="hidden px-3 py-3.5 text-left text-sm font-semibold text-neutral-200 sm:table-cell"
             >
               Created At
-            </th>
-            <th scope="col" className="relative py-3.5 pr-4 pl-3 sm:pr-0">
-              <span className="sr-only">Edit</span>
             </th>
           </tr>
         </thead>
@@ -46,23 +44,23 @@ export default function RepositoriesTable({ data }: RepositoriesTableProps) {
               <td className="w-full max-w-0 py-4 pr-3 pl-4 text-sm font-medium text-neutral-100 sm:w-auto sm:max-w-none sm:pl-0">
                 {repository.name}
                 <dl className="font-normal lg:hidden">
-                  <dt className="sr-only">Title</dt>
+                  <dt className="sr-only">Owner</dt>
                   <dd className="mt-1 truncate text-neutral-300">
                     {repository.owner.login}
                   </dd>
-                  <dt className="sr-only sm:hidden">Email</dt>
+                  <dt className="sr-only sm:hidden">Created At</dt>
                   <dd className="mt-1 truncate text-neutral-400 sm:hidden">
-                    {repository.stargazers_count}
+                    {repository.created_at}
                   </dd>
                 </dl>
               </td>
               <td className="hidden px-3 py-4 text-sm text-neutral-400 lg:table-cell">
                 {repository.owner.login}
               </td>
-              <td className="hidden px-3 py-4 text-sm text-neutral-400 sm:table-cell">
+              <td className="px-3 py-4 text-sm text-neutral-400">
                 {repository.stargazers_count}
               </td>
-              <td className="px-3 py-4 text-sm text-neutral-400">
+              <td className="hidden px-3 py-4 text-sm text-neutral-400 sm:table-cell">
                 {repository.created_at}
               </td>
             </tr>
