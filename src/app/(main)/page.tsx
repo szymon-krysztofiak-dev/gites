@@ -17,18 +17,30 @@ export default async function Home({
   });
 
   return (
-    <main className="min-h-full space-y-4 mt-8 bg-neutral-950">
-      <div className="sm:flex sm:flex-col">
-        <h2 className="text-xl font-bold">Results</h2>
-        <p className="mt-2 text-sm text-gray-300">
-          A list of repositories that match your search query.
-        </p>
-      </div>
+    <main className="mt-8 min-h-full space-y-4 bg-neutral-950">
+      {items.length > 0 ? (
+        <>
+          <div className="sm:flex sm:flex-col">
+            <h2 className="text-xl font-bold">Results for {search}</h2>
+            <p className="mt-2 text-sm text-gray-300">
+              A list of repositories that match your search query.
+            </p>
+          </div>
 
-      <section className="not-prose relative overflow-hidden flex flex-col gap-y-4">
-        <Table data={items} />
-        <Pagination totalCount={total_count} />
-      </section>
+          <section className="not-prose relative flex flex-col gap-y-4 overflow-hidden">
+            <Table data={items} />
+            <Pagination totalCount={total_count} />
+          </section>
+        </>
+      ) : (
+        <div className="sm:flex sm:flex-col">
+          <h2 className="text-xl font-bold">Nothing to show yet</h2>
+          <p className="mt-2 text-sm text-gray-300">
+            Use the search bar to get list of repositories that match your
+            search query.
+          </p>
+        </div>
+      )}
     </main>
   );
 }

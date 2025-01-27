@@ -42,5 +42,5 @@ export async function getRepositories({
       `&per_page=${PAGINATION_PER_PAGE}`,
   ).then((res) => res.json());
 
-  return { items: data.items, total_count: data.total_count };
+  return { items: data.items || [], total_count: data.total_count || 0 };
 }

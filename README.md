@@ -50,18 +50,37 @@ I focused on an implementation based on SSR and caching, which was introduced wi
 
 **Tailwind CSS:** A utility framework that allows me to focus on more important aspects of building the application. Due to limited time, I chose this solution.
 
+## MVP Implementation
+
+- [x] Init repo and config
+- [x] Layout
+- [x] Search input field
+  - [x] Deterministic results for identical URL search parameters
+    - [x] search param
+    - [x] pagination
+    - [x] sorting
+- [x] API layer
+- [x] Results table with sortable columns:
+  - Name
+  - Owner
+  - Stars
+  - Created at
+- [x] Pagination
+- [x] RWD
+- [x] Readme
+
 ## Future Improvements
 
 - [ ] The `RepositoriesTable` component could be replaced with a generic `Table` using appropriate props and generic types.
 - [ ] Instead of disabling the search, display a message that is more user-friendly. The user doesn't necessarily need to immediately associate the disabled button with the lack of a search query.
 - [ ] Add more columns for sorting. We can sort the results of our query by the number of stars, forks, help-wanted-issues, or how recently the items were updated. Since we only have stars, we can only manage the order.
-- [ ] not-found page
+- [x] not-found page
+- [ ] Empty state
 - [ ] Error states
 - [ ] Cache settings
 - [ ] More info in results table
 - [ ] Loading states
-- [ ] Better transitions
-- [ ] Better loading states
+- [ ] Transitions
 - [ ] Tests - since it is a super small app, I’ll do it only if I have some time left
   - [ ] Vitest ft React Testing Library
 - [ ] Adding repo to favorites
