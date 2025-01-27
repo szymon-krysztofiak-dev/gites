@@ -1,4 +1,5 @@
 import { Repository } from "@/api/repositories";
+import { format } from "date-fns";
 import SortButton from "./SortButton";
 
 type RepositoriesTableProps = {
@@ -50,7 +51,7 @@ export default function RepositoriesTable({ data }: RepositoriesTableProps) {
                   </dd>
                   <dt className="sr-only sm:hidden">Created At</dt>
                   <dd className="mt-1 truncate text-neutral-400 sm:hidden">
-                    {repository.created_at}
+                    {format(new Date(repository.created_at), "MMM d, yyyy")}
                   </dd>
                 </dl>
               </td>
@@ -61,7 +62,7 @@ export default function RepositoriesTable({ data }: RepositoriesTableProps) {
                 {repository.stargazers_count}
               </td>
               <td className="hidden px-3 py-4 text-sm text-neutral-400 sm:table-cell">
-                {repository.created_at}
+                {format(new Date(repository.created_at), "MMMM d, yyyy")}
               </td>
             </tr>
           ))}
