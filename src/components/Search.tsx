@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useCallback, useState } from "react";
 
-const Search = () => {
+export default function Search() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -40,12 +40,11 @@ const Search = () => {
       />
       <button
         type="submit"
-        className="flex shrink-0 items-center px-4 py-2 h-12 bg-emerald-500 text-emerald-50 rounded-md hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        className="flex shrink-0 items-center px-4 py-2 h-12 bg-emerald-500 text-emerald-50 rounded-md hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 :disabled:bg-emerald-400 disabled:text-neutral-400 disabled:bg-neutral-300 disabled:cursor-not-allowed"
+        disabled={!input.trim()}
       >
         Search
       </button>
     </form>
   );
-};
-
-export default Search;
+}

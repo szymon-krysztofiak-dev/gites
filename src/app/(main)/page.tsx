@@ -1,4 +1,5 @@
 import { getRepositories } from "@/api/repositories";
+import Table from "@/components/RepositoriesTable";
 
 export default async function Home({
   searchParams,
@@ -11,17 +12,15 @@ export default async function Home({
 
   return (
     <main className="min-h-full space-y-4 mt-8 bg-neutral-950">
-      <h2 className="text-2xl font-bold">Results</h2>
+      <div className="sm:flex sm:flex-col">
+        <h2 className="text-xl font-bold">Results</h2>
+        <p className="mt-2 text-sm text-gray-300">
+          A list of repositories that match your search query.
+        </p>
+      </div>
+
       <section className="not-prose relative overflow-hidden flex flex-col gap-y-4">
-        {data.map((repo) => (
-          <article
-            key={repo.id}
-            className="flex flex-col gap-y-2 p-4 bg-neutral-900 rounded-md"
-          >
-            <h3 className="text-xl font-bold">{repo.name}</h3>
-            <p className="text-neutral-400">{repo.id}</p>
-          </article>
-        ))}
+        <Table data={data} />
       </section>
     </main>
   );
