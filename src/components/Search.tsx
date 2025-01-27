@@ -1,21 +1,30 @@
 "use client";
 
-import { useSearchStore } from "@/hooks/useSearchStore";
-import { FormEvent, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FormEvent, useCallback, useState } from "react";
 
 const Search = () => {
-  const [input, setInput] = useState("");
-  const [query, setQuery] = useState("");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search");
+  const [input, setInput] = useState(search || "");
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    setQuery(input.trim());
+    router.push(pathname + "?" + createQueryString("search", input.trim()));
   };
-
-  const { data } = useSearchStore({ query });
-
-  console.log("🚀 ~ Home ~ data:", data);
 
   return (
     <form

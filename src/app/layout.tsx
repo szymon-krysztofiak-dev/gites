@@ -1,4 +1,3 @@
-import { ClientProvider } from "@/providers/ClientProvider";
 import "@/styles/globals.css";
 import { cn } from "@/utils/cn";
 import type { Metadata } from "next";
@@ -23,9 +22,7 @@ export default function RootLayout({
       className="h-full bg-neutral-950 text-neutral-50 antialiased"
     >
       <body className={cn("flex min-h-full", monaSans.className)}>
-        <div className="w-full">
-          <ClientProvider>{children}</ClientProvider>
-        </div>
+        <div className="w-full">{children}</div>
       </body>
     </html>
   );
